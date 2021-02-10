@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
+    # @post_users = @post.users.uniq
   end
 
   def index

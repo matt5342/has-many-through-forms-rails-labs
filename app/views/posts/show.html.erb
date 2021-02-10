@@ -1,1 +1,29 @@
 
+<%= @post.title %>
+<%= @post.content %>
+
+
+<% @post.categories.each do |c|%>
+    <%= c.name %>
+    <% end %>
+    <% @post.comments.each do |c|%>
+    <%= c.content %>
+    <% end %>
+<% uniq_users = @post.users.uniq%>
+<% uniq_users.each do |u| %>
+    <%= link_to u.username, user_path(u) %>
+    <% end %>
+
+<%= form_for @post.comments.build do |form| %>
+    <%= form.hidden_field :post_id %>
+    <%= form.collection_select(:user_id, User.all, :id, :username)  %>
+    <%= form.label :content%>
+    <%= form.text_area :content %>
+
+    <%= submit_tag 'Create Comment'%>
+
+
+<%end%>  
+
+
+
